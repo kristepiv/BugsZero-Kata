@@ -18,11 +18,11 @@ public class GameRunner {
 	}
 
 	public static void playGame(Random rand) {
-		Game aGame = new Game();
+		Game aGame = new Game("Chet", "Pat", "Sue");
 
-		aGame.add("Chet");
-		aGame.add("Pat");
-		aGame.add("Sue");
+//		aGame.add("Chet");
+//		aGame.add("Pat");
+//		aGame.add("Sue");
 
 
 		do {

@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Game {
@@ -16,14 +17,40 @@ public class Game {
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
-    
-    public  Game(){
-    	for (int i = 0; i < 50; i++) {
-			popQuestions.addLast("Pop Question " + i);
-			scienceQuestions.addLast(("Science Question " + i));
-			sportsQuestions.addLast(("Sports Question " + i));
-			rockQuestions.addLast(createRockQuestion(i));
-    	}
+
+    public Game (String player1, String player2) {
+        Validator.validatePlayers(player1, player2);
+        constructGame(player1, player2);
+    }
+
+    public Game (String player1, String player2, String player3) {
+        Validator.validatePlayers(player1, player2, player3);
+        constructGame(player1, player2, player3);
+    }
+
+    public Game (String player1, String player2, String player3, String player4) {
+        Validator.validatePlayers(player1, player2, player3, player4);
+        constructGame(player1, player2, player3, player4);
+    }
+
+    public Game (String player1, String player2, String player3, String player4, String player5) {
+        Validator.validatePlayers(player1, player2, player3, player4, player5);
+        constructGame(player1, player2, player3, player4, player5);
+    }
+
+    public Game (String player1, String player2, String player3, String player4, String player5, String player6) {
+        Validator.validatePlayers(player1, player2, player3, player4, player5, player6);
+        constructGame(player1, player2, player3, player4, player5, player6);
+    }
+
+    private void constructGame(String ... gamePlayers) {
+        players.addAll(Arrays.asList(gamePlayers));
+        for (int i = 0; i < 50; i++) {
+            popQuestions.addLast("Pop Question " + i);
+            scienceQuestions.addLast(("Science Question " + i));
+            sportsQuestions.addLast(("Sports Question " + i));
+            rockQuestions.addLast(createRockQuestion(i));
+        }
     }
 
 	public String createRockQuestion(int index){
