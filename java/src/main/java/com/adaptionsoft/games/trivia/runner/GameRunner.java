@@ -19,12 +19,6 @@ public class GameRunner {
 
 	public static void playGame(Random rand) {
 		Game aGame = new Game("Chet", "Pat", "Sue");
-
-//		aGame.add("Chet");
-//		aGame.add("Pat");
-//		aGame.add("Sue");
-
-
 		do {
 
 			aGame.roll(rand.nextInt(5) + 1);
