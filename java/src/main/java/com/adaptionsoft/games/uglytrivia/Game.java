@@ -36,7 +36,7 @@ public class Game {
     }
 
     private void setGameQuestions(){
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 7; i++) {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
@@ -85,7 +85,12 @@ public class Game {
 		if (currentCategory() == "Sports")
 			System.out.println(sportsQuestions.removeFirst());
 		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+			System.out.println(rockQuestions.removeFirst());
+
+        if (popQuestions.size() < 6 || scienceQuestions.size() < 6 || sportsQuestions.size() < 6 || rockQuestions.size() < 6) {
+            setGameQuestions();
+            System.out.println("Questions reset triggered");
+        }
 	}
 	
 	
