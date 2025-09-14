@@ -36,7 +36,7 @@ public class Game {
     }
 
     private void setGameQuestions(){
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 7; i++) {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
@@ -51,8 +51,8 @@ public class Game {
 		if (inPenaltyBox[currentPlayer]) {
 			if (roll % 2 != 0) {
 				isGettingOutOfPenaltyBox = true;
-				
-				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+                inPenaltyBox[currentPlayer] = false;
+                System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
 				movePlayerAndAskQuestion(roll);
 			} else {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
@@ -85,22 +85,25 @@ public class Game {
 		if (currentCategory() == "Sports")
 			System.out.println(sportsQuestions.removeFirst());
 		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+			System.out.println(rockQuestions.removeFirst());
+
+        if (popQuestions.size() < 6 || scienceQuestions.size() < 6 || sportsQuestions.size() < 6 || rockQuestions.size() < 6) {
+            setGameQuestions();
+            System.out.println("Questions reset triggered");
+        }
 	}
 	
 	
 	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Sports";
-		return "Rock";
-	}
+        int position = places[currentPlayer];
+        switch (position % 4 ) {
+            case 0 : return "Pop";
+            case 1 : return "Science";
+            case 2 : return "Sports";
+            case 3 : return "Rock";
+            default: throw new IllegalStateException("Invalid position: " + position);
+        }
+    }
 
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
