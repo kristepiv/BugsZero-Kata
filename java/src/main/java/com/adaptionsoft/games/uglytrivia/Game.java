@@ -24,41 +24,27 @@ public class Game {
     }
 
     private void constructGame(String ... gamePlayers) {
-        players.addAll(Arrays.asList(gamePlayers));
+        for (String playerName : gamePlayers) {
+            players.add(playerName);
+            System.out.println(playerName + " was added");
+            System.out.println("They are player number " + players.size());
+        }
+        places[players.size()] = 0;
+        purses[players.size()] = 0;
+        inPenaltyBox[players.size()] = false;
+        setGameQuestions();
+    }
+
+    private void setGameQuestions(){
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(createRockQuestion(i));
+            rockQuestions.addLast("Rock Question " + i);
         }
     }
 
-	public String createRockQuestion(int index){
-		return "Rock Question " + index;
-	}
-
-	public boolean isPlayable() {
-		return (howManyPlayers() >= 2);
-	}
-
-	public boolean add(String playerName) {
-		
-		
-	    players.add(playerName);
-	    places[howManyPlayers()] = 0;
-	    purses[howManyPlayers()] = 0;
-	    inPenaltyBox[howManyPlayers()] = false;
-	    
-	    System.out.println(playerName + " was added");
-	    System.out.println("They are player number " + players.size());
-		return true;
-	}
-	
-	public int howManyPlayers() {
-		return players.size();
-	}
-
-	public void roll(int roll) {
+    public void roll(int roll) {
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);
 		
